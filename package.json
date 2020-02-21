@@ -1,0 +1,45 @@
+{
+  "name": "terraform-extension",
+  "title": "Terraform language extension",
+  "description": "Language extension for Terraform",
+  "publisher": "juliosueiras",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juliosueiras/sourcegraph-terraform"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "actions": [],
+    "menus": {
+      "editor/title": [],
+      "commandPalette": []
+    },
+    "configuration": {}
+  },
+  "version": "0.0.0-DEVELOPMENT",
+  "license": "MIT",
+  "main": "dist/terraform-extension.js",
+  "scripts": {
+    "tslint": "tslint -p tsconfig.json './src/**/*.ts'",
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "parcel build --out-file dist/terraform-extension.js src/terraform-extension.ts",
+    "symlink-package": "mkdirp dist && lnfs ./package.json ./dist/package.json",
+    "serve": "npm run symlink-package && parcel serve --no-hmr --out-file dist/terraform-extension.js src/terraform-extension.ts",
+    "watch:typecheck": "tsc -p tsconfig.json -w",
+    "watch:build": "tsc -p tsconfig.dist.json -w",
+    "sourcegraph:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@sourcegraph/basic-code-intel": "10.0.0",
+    "@sourcegraph/tsconfig": "^3.0.0",
+    "@sourcegraph/tslint-config": "^12.3.1",
+    "lnfs-cli": "^2.1.0",
+    "mkdirp": "^0.5.1",
+    "parcel-bundler": "^1.11.0",
+    "sourcegraph": "^20.1.0",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2"
+  }
+}
